@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { ActivityIndicator } from 'react-native';
+import { useFonts } from 'expo-font';
+import Root from './src/index';
 
 export default function App() {
+  const [loaded] = useFonts({
+    'nunito': require('./assets/fonts/Nunito-Italic-VariableFont_wght.ttf')
+  });
+
+  if (!loaded) {
+    return <ActivityIndicator />
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Root />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
