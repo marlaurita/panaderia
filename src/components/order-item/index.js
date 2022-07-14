@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from "react-native";
 import { styles } from './styles';
 
-const OrderItem = ({item}) => {
+const OrderItem = ({item, onDelete}) => {
     return (
         <View style={styles.container}>
-            <TouchableOpacity onPress={()=> onSelected(item)}  style={styles.containerTouchable}>
+            <TouchableOpacity onPress={()=> onDelete(item.id)}  style={styles.containerTouchable}>
             <View>
                 <Text style={styles.name}>ID: {item.id}</Text>
                 <Text style={styles.detail}>Fecha: {item.date}</Text> 
