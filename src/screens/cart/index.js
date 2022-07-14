@@ -1,17 +1,20 @@
 import react from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {View, Text, FlatList, TouchableOpacity } from "react-native";
 import { styles } from "./style";
 import { CartItem } from "../../components";
-import { cart } from "../../data/cart";
+import { removeItem, confirmCart } from "../../store/actions/car.action";
 
 const CartScreen =() => {
-    const TOTAL = "12.150";
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.items);
+  const total = useSelector((state) => state.cart.total)
     const onHandlerDelete = (id) => {
-        console.log(id);
+      dispatch(removeItem(id));
     }
 
     const onHandlerConfirmCart = () => {
-        console.log("Confirm cart");
+      dispatch(confirmCart(cart, total));
     };
     
     const renderItem = ({item}) => <CartItem item={item} onDelete={onHandlerDelete}/>
@@ -32,7 +35,7 @@ const CartScreen =() => {
             <Text style={styles.buttonText}>Confirm</Text>
             <View style={styles.totalContainer}>
               <Text style={styles.totalTitle}>Total</Text>
-              <Text style={styles.total}>${TOTAL}</Text>
+              <Text style={styles.total}>${total}</Text>
             </View>
           </TouchableOpacity>
         </View>
